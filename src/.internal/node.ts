@@ -8,6 +8,9 @@ export class TreeNode<T> {
 
 export class LinkedNode<T> {
   constructor(public item: T, public next?: LinkedNode<T>) {}
+  toString() {
+    return `${this.item}`;
+  }
 }
 
 export class DoublyLinkedNode<T> extends LinkedNode<T> {

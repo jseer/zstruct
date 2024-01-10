@@ -1,7 +1,7 @@
 import { LinkedList } from "../src";
 
 describe("LinkedList", () => {
-  test("LinkedList insert size", () => {
+  test("LinkedList insert size toString", () => {
     const linkedList = new LinkedList();
     linkedList.push(1);
     linkedList.push(2);
@@ -12,6 +12,7 @@ describe("LinkedList", () => {
     linkedList.insert(2, 33);
     expect(linkedList.get(2)).toEqual(33);
     expect(linkedList.get(3)).toEqual(3);
+    expect(linkedList.toString()).toEqual("1->2->33->3->4->5");
   });
 
   test("LinkedList remove", () => {

@@ -111,4 +111,15 @@ export class BaseLinkedList<T> {
     this.head = undefined;
     this.tail = undefined;
   }
+
+  toString() {
+    let i = -1;
+    let current = this.head;
+    let str = "";
+    while (++i < this.count) {
+      str += current!.toString() + (i === this.count - 1 ? "" : "->");
+      current = current!.next;
+    }
+    return str;
+  }
 }

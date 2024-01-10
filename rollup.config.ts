@@ -19,11 +19,11 @@ export default defineConfig([
     output: [
       {
         format: "cjs",
-        file: `dist/${name}.cjs`,
+        file: `dist/index.cjs`,
       },
       {
         format: "es",
-        file: `dist/${name}.mjs`,
+        file: `dist/index.js`,
       },
       {
         format: "iife",
@@ -42,11 +42,11 @@ export default defineConfig([
     output: [
       {
         format: "cjs",
-        file: `dist/${name}.d.cts`,
+        file: `dist/index.d.cts`,
       },
       {
         format: "es",
-        file: `dist/${name}.d.mts`,
+        file: `dist/index.d.ts`,
       },
     ],
     plugins: [dts()],
@@ -65,7 +65,6 @@ export default defineConfig([
       }),
       ts({
         tsconfig: path.resolve(__dirname, "tsconfig.json"),
-        rootDir: "./src",
       }),
       terser(),
     ],
