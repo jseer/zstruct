@@ -28,7 +28,7 @@ describe("LinkedList", () => {
     expect(linkedList.indexOf(2)).toEqual(1);
   });
 
-  test("LinkedList getLast getHead", () => {
+  test("LinkedList getLast getHead remove", () => {
     const linkedList = new LinkedList();
     linkedList.push(1);
     linkedList.push(2);
@@ -39,5 +39,10 @@ describe("LinkedList", () => {
     linkedList.remove(5);
     expect(linkedList.getHead()).toEqual(2);
     expect(linkedList.getLast()).toEqual(4);
+    linkedList.remove(2);
+    linkedList.remove(3);
+    linkedList.remove(4);
+    expect(linkedList.getHead()).toBeUndefined();
+    expect(linkedList.getLast()).toBeUndefined();
   });
 });

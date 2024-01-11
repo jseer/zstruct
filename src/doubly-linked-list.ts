@@ -5,9 +5,6 @@ import { BaseLinkedList } from "./.internal/base-linked-list";
 export class DoublyLinkedList<T> extends BaseLinkedList<T> {
   protected head: DoublyLinkedNode<T> | undefined = undefined;
   protected tail: DoublyLinkedNode<T> | undefined = undefined;
-  constructor(protected equalsFn: EqualsFunction<T> = defaultEquals) {
-    super(equalsFn);
-  }
 
   push(item: T) {
     const node = new DoublyLinkedNode(item);

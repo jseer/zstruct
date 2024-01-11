@@ -1,5 +1,4 @@
 import { BaseLinkedList } from "./.internal/base-linked-list";
-import { LinkedNode } from "./.internal/node";
 import {
   Compare,
   CompareFunction,
@@ -9,8 +8,6 @@ import {
 } from "./.internal/util";
 
 export class SortedLinkedList<T> extends BaseLinkedList<T> {
-  protected head: LinkedNode<T> | undefined = undefined;
-  protected tail: LinkedNode<T> | undefined = undefined;
   constructor(
     protected equalsFn: EqualsFunction<T> = defaultEquals,
     protected compareFn: CompareFunction<T> = defaultCompare

@@ -46,8 +46,32 @@ export function defaultCompare<T>(a: T, b: T): number {
   }
   return a < b ? Compare.LESS_THAN : Compare.GREATER_THAN;
 }
+export function lessThanOrEqual<T>(
+  a: T,
+  b: T,
+  compareFn: CompareFunction<T> = defaultCompare
+) {
+  const result = compareFn(a, b);
+  return result === Compare.LESS_THAN || result === Compare.EQUATION;
+}
+export function greaterThanOrEqual<T>(
+  a: T,
+  b: T,
+  compareFn: CompareFunction<T> = defaultCompare
+) {
+  const result = compareFn(a, b);
+  return result === Compare.GREATER_THAN || result === Compare.EQUATION;
+}
 
 export type EqualsFunction<T> = (a: T, b: T) => boolean;
 export function defaultEquals<T>(a: T, b: T): boolean {
   return a === b;
+}
+
+export function swap(array: any[], a: number, b: number) {
+  [array[a], array[b]] = [array[b], array[a]];
+}
+
+export function randomNumber(start: number, end: number) {
+  return Math.floor(Math.random() * (end - start) + 1);
 }

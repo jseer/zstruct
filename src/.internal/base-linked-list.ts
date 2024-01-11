@@ -58,6 +58,7 @@ export class BaseLinkedList<T> {
   }
 
   get(index: number) {
+    if (index < 0) index = this.count + index;
     return this.getNodeAt(index)?.item;
   }
 
@@ -70,9 +71,12 @@ export class BaseLinkedList<T> {
   }
 
   protected removeAt(index: number) {
-    if (this.head && index >= 0 && index < this.count) {
+    if (index >= 0 && index < this.count) {
       if (index === 0) {
-        this.head = this.head.next;
+        this.head = this.head!.next;
+        if (!this.head) {
+          this.tail = this.head;
+        }
       } else {
         const prev = this.getNodeAt(index - 1);
         prev!.next = prev!.next!.next;
@@ -86,7 +90,7 @@ export class BaseLinkedList<T> {
     return false;
   }
 
-  protected getNodeAt(index: number) {
+  getNodeAt(index: number) {
     if (index >= 0 && index < this.count) {
       let i = -1;
       let current = this.head;
