@@ -57,6 +57,7 @@ export default defineConfig([
       format: "iife",
       file: `dist/${name}.min.js`,
       name: "zstruct",
+      sourcemap: "hidden",
     },
     plugins: [
       babel({

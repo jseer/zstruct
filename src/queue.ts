@@ -1,4 +1,4 @@
-import { ArrayLike } from "./.internal/ArrayLike";
+import { ArrayLike } from "./common/ArrayLike";
 export class Queue<T> {
   protected items: ArrayLike<T>;
   constructor() {
@@ -6,11 +6,11 @@ export class Queue<T> {
   }
 
   enqueue(item: T) {
-    this.items.push(item);
+    return this.items.push(item);
   }
 
   dequeue() {
-    return this.items.pop();
+    return this.items.shift();
   }
 
   peek() {

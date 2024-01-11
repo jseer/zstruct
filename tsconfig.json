@@ -6,8 +6,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "removeComments": true,
-    "rootDir": "./src"
+    "removeComments": true
   },
   "exclude": ["node_modules", "dist"]
 }

@@ -8,6 +8,7 @@ describe("DoublyLinkedList", () => {
     doublyLinkedList.push(3);
     doublyLinkedList.push(4);
     doublyLinkedList.push(5);
+    expect(doublyLinkedList.get(3)).toEqual(4);
     expect(doublyLinkedList.size()).toEqual(5);
     doublyLinkedList.insert(2, 33);
     expect(doublyLinkedList.get(2)).toEqual(33);

@@ -39,17 +39,21 @@ export enum Compare {
   GREATER_THAN = 1,
   EQUATION = 0,
 }
-export type CompareFunction<T> = (a: T, b: T) => number;
+export type CompareFn<T> = (a: T, b: T) => number;
 export function defaultCompare<T>(a: T, b: T): number {
   if (a === b) {
     return Compare.EQUATION;
   }
   return a < b ? Compare.LESS_THAN : Compare.GREATER_THAN;
 }
+
+export function reverseCompare<T>(compareFn: CompareFn<T>): CompareFn<T> {
+  return (a, b) => compareFn(b, a);
+}
 export function lessThanOrEqual<T>(
   a: T,
   b: T,
-  compareFn: CompareFunction<T> = defaultCompare
+  compareFn: CompareFn<T> = defaultCompare
 ) {
   const result = compareFn(a, b);
   return result === Compare.LESS_THAN || result === Compare.EQUATION;
@@ -57,13 +61,13 @@ export function lessThanOrEqual<T>(
 export function greaterThanOrEqual<T>(
   a: T,
   b: T,
-  compareFn: CompareFunction<T> = defaultCompare
+  compareFn: CompareFn<T> = defaultCompare
 ) {
   const result = compareFn(a, b);
   return result === Compare.GREATER_THAN || result === Compare.EQUATION;
 }
 
-export type EqualsFunction<T> = (a: T, b: T) => boolean;
+export type EqualsFn<T> = (a: T, b: T) => boolean;
 export function defaultEquals<T>(a: T, b: T): boolean {
   return a === b;
 }
@@ -72,6 +76,6 @@ export function swap(array: any[], a: number, b: number) {
   [array[a], array[b]] = [array[b], array[a]];
 }
 
-export function randomNumber(start: number, end: number) {
+export function randomNum(start: number, end: number) {
   return Math.floor(Math.random() * (end - start) + 1);
 }

@@ -1,4 +1,4 @@
-import { BaseLinkedList } from "./.internal/base-linked-list";
+import { BaseLinkedList } from "./common/base-linked-list";
 
 export class CircularLinkedList<T> extends BaseLinkedList<T> {
   push(item: T) {
@@ -27,6 +27,10 @@ export class CircularLinkedList<T> extends BaseLinkedList<T> {
       }
     }
     return removed;
+  }
+
+  getNodeAt(index: number){
+    return super.getNodeAt(index);
   }
 
   toString() {

@@ -1,4 +1,4 @@
-import { ArrayLike } from "./.internal/ArrayLike";
+import { ArrayLike } from "./common/ArrayLike";
 
 export class Deque<T> {
   protected items: ArrayLike<T>;

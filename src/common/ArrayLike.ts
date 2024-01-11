@@ -52,7 +52,7 @@ export class ArrayLike<T> {
 
   shift() {
     if (this.length) {
-      const start = this.start;
+      const start = this[this.start];
       delete this[this.start];
       this.start++;
       return start;
@@ -80,7 +80,7 @@ export class ArrayLike<T> {
     const result: T[] = [];
     forEach(
       this,
-      (item, i) => {
+      (item) => {
         result.push(item);
       },
       this.start

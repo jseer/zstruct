@@ -1,15 +1,16 @@
 import {
   Compare,
   defaultCompare,
-  CompareFunction,
+  CompareFn,
   swap,
   lessThanOrEqual,
-} from "./.internal/util";
+  reverseCompare,
+} from "./common/util";
 
 export class MinHeap<T> {
   protected heap: T[] = [];
 
-  constructor(protected compareFn: CompareFunction<T> = defaultCompare) {}
+  constructor(protected compareFn: CompareFn<T> = defaultCompare) {}
 
   getParent(index: number) {
     if (index === 0) {
@@ -107,13 +108,13 @@ export class MinHeap<T> {
   }
 
   toArray() {
-    return this.heap;
+    return this.heap.slice();
   }
 }
 
 export class MaxHeap<T> extends MinHeap<T> {
   constructor(
-    protected compareFn: CompareFunction<T> = (a, b) => defaultCompare(b, a)
+    protected compareFn: CompareFn<T> = reverseCompare(defaultCompare)
   ) {
     super(compareFn);
   }
@@ -122,10 +123,7 @@ export class MaxHeap<T> extends MinHeap<T> {
 export interface ConformFn<T> {
   (current: T, target: T): boolean;
 }
-function isHeap<T>(
-  heap: MinHeap<T>,
-  compareFn: CompareFunction<T> = defaultCompare
-) {
+function isHeap<T>(heap: MinHeap<T>, compareFn: CompareFn<T>) {
   const maxIndex = heap.getParent(heap.size() - 1);
   let i = -1;
   if (maxIndex) {
@@ -147,14 +145,14 @@ function isHeap<T>(
 
 export function isMinHeap<T>(
   heap: MinHeap<T>,
-  compareFn: CompareFunction<T> = defaultCompare
+  compareFn: CompareFn<T> = defaultCompare
 ) {
   return isHeap(heap, compareFn);
 }
 
 export function isMaxHeap<T>(
   heap: MinHeap<T>,
-  compareFn: CompareFunction<T> = (a, b) => defaultCompare(b, a)
+  compareFn: CompareFn<T> = reverseCompare(defaultCompare)
 ) {
   return isHeap(heap, compareFn);
 }

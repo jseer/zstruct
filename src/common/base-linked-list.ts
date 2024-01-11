@@ -1,13 +1,13 @@
 import { DoublyLinkedNode, LinkedNode } from "./node";
-import { EqualsFunction, defaultEquals } from "./util";
+import { EqualsFn, defaultEquals } from "./util";
 
 export class BaseLinkedList<T> {
   protected count = 0;
   protected head: LinkedNode<T> | DoublyLinkedNode<T> | undefined;
   protected tail: LinkedNode<T> | DoublyLinkedNode<T> | undefined;
-  constructor(protected equalsFn: EqualsFunction<T> = defaultEquals) {}
+  constructor(protected equalsFn: EqualsFn<T> = defaultEquals) {}
 
-  push(item: T) {
+  protected push(item: T) {
     const node = new LinkedNode(item);
     if (this.isEmpty()) {
       this.head = node;
@@ -70,6 +70,14 @@ export class BaseLinkedList<T> {
     return this.head?.item;
   }
 
+  protected removeLast() {
+    return this.removeAt(this.count - 1);
+  }
+
+  protected removeHead() {
+    return this.removeAt(0);
+  }
+
   protected removeAt(index: number) {
     if (index >= 0 && index < this.count) {
       if (index === 0) {
@@ -90,7 +98,7 @@ export class BaseLinkedList<T> {
     return false;
   }
 
-  getNodeAt(index: number) {
+  protected getNodeAt(index: number) {
     if (index >= 0 && index < this.count) {
       let i = -1;
       let current = this.head;

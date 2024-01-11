@@ -1,16 +1,16 @@
-import { BaseLinkedList } from "./.internal/base-linked-list";
+import { BaseLinkedList } from "./common/base-linked-list";
 import {
   Compare,
-  CompareFunction,
-  EqualsFunction,
+  CompareFn,
+  EqualsFn,
   defaultCompare,
   defaultEquals,
-} from "./.internal/util";
+} from "./common/util";
 
 export class SortedLinkedList<T> extends BaseLinkedList<T> {
   constructor(
-    protected equalsFn: EqualsFunction<T> = defaultEquals,
-    protected compareFn: CompareFunction<T> = defaultCompare
+    protected compareFn: CompareFn<T> = defaultCompare,
+    protected equalsFn: EqualsFn<T> = defaultEquals
   ) {
     super(equalsFn);
   }

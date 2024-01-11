@@ -1,6 +1,5 @@
-import { DoublyLinkedNode } from "./.internal/node";
-import { EqualsFunction, defaultEquals } from "./.internal/util";
-import { BaseLinkedList } from "./.internal/base-linked-list";
+import { DoublyLinkedNode } from "./common/node";
+import { BaseLinkedList } from "./common/base-linked-list";
 
 export class DoublyLinkedList<T> extends BaseLinkedList<T> {
   protected head: DoublyLinkedNode<T> | undefined = undefined;
@@ -71,5 +70,22 @@ export class DoublyLinkedList<T> extends BaseLinkedList<T> {
       return true;
     }
     return false;
+  }
+
+  getNodeAt(index: number) {
+    if (index >= 0 && index < this.count) {
+      const mid = this.count >> 1;
+      if (index < mid) {
+        return super.getNodeAt(index);
+      } else {
+        let i = this.count;
+        let current = this.tail;
+        while (--i > index) {
+          current = current!.prev;
+        }
+        return current;
+      }
+    }
+    return undefined;
   }
 }
