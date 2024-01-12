@@ -1,11 +1,11 @@
 export class TreeNode<T> {
   constructor(
-    public key: T,
-    public left: TreeNode<T>,
-    public right: TreeNode<T>
+    public item: T,
+    public left?: NullableTreeNode<T>,
+    public right?: NullableTreeNode<T>
   ) {}
 }
-
+export type NullableTreeNode<T> = TreeNode<T> | null | undefined;
 export class LinkedNode<T> {
   constructor(public item: T, public next?: LinkedNode<T>) {}
   toString() {
