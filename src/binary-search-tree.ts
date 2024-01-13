@@ -1,8 +1,14 @@
-import { TreeNode, NullableTreeNode } from "./common/node";
-import { Compare, CompareFn, defaultCompare } from "./common/util";
+import { TreeNode, NullableTreeNode } from './common/node';
+import {
+  Compare,
+  CompareFn,
+  defaultCompare,
+  greaterThanOrEqual,
+  lessThanOrEqual,
+} from './common/util';
 
 interface OrderCallback<T> {
-  (node: TreeNode<T>["item"]): void;
+  (node: TreeNode<T>['item']): void;
 }
 
 export class BinarySearchTree<T> {
@@ -163,10 +169,6 @@ export class BinarySearchTree<T> {
         node.item = n!.item;
         node!.right = this.removeNode(node.right, n!.item);
         return node;
-        // todo:
-        // n!.left = node.left;
-        // n!.right = this.removeNode(node.right, n!.item);
-        // return n;
       }
     }
   }
@@ -177,18 +179,26 @@ export function isBST<T>(
   compareFn: CompareFn<T> = defaultCompare
 ) {
   if (!node) return false;
-  let result = true;
-  let prev: NullableTreeNode<T> = null;
-  const dfs = (node: NullableTreeNode<T>) => {
-    if (!result || !node) return;
-    dfs(node.left);
-    if (prev && compareFn(prev.item, node.item) === Compare.GREATER_THAN) {
-      result = false;
-      return;
+  const inRange = (
+    node: NullableTreeNode<T>,
+    min?: NullableTreeNode<T>,
+    max?: NullableTreeNode<T>
+  ): Boolean => {
+    if (node) {
+      let result = true;
+      if (min) {
+        result = lessThanOrEqual(min.item, node.item, compareFn);
+      }
+      if (result && max) {
+        result = greaterThanOrEqual(max.item, node.item, compareFn);
+      }
+      return (
+        result &&
+        inRange(node.left, min, node) &&
+        inRange(node.right, node, max)
+      );
     }
-    prev = node;
-    dfs(node.right);
+    return true;
   };
-  dfs(node);
-  return result;
+  return inRange(node);
 }
